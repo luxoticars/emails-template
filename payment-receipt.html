@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Payment confirmed — Luxoticars</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f7f6f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f6f5;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+          <!-- HEADER -->
+          <tr>
+            <td style="background-color:#0c0f1a;padding:24px 32px;border-radius:4px 4px 0 0;">
+              <a href="https://luxoticars.com" style="text-decoration:none;">
+                <img src="https://cdn.luxoticars.cc/6201743827387748208.jpg" width="168" height="78" alt="LUXOTICARS" style="display:block;height:78px;width:168px;" />
+              </a>
+            </td>
+          </tr>
+
+          <!-- CONTENT CARD (no hero — financial document, clean) -->
+          <tr>
+            <td style="background-color:#ffffff;padding:40px 32px;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-top:1px solid #e2e8f0;">
+              <p style="margin:0 0 8px 0;font-size:12px;font-weight:600;color:#78cde8;text-transform:uppercase;letter-spacing:0.14em;">Payment Confirmed</p>
+              <h1 style="margin:0 0 16px 0;font-size:24px;font-weight:700;color:#1c1e2e;line-height:1.3;letter-spacing:-0.01em;">You're all paid up, {{name}}.</h1>
+              <p style="margin:0 0 28px 0;font-size:16px;color:#1c1e2e;line-height:1.6;">Your listing has been renewed. Here's your receipt — keep it for your records.</p>
+
+              <!-- RECEIPT TABLE -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;border:1px solid #e2e8f0;border-radius:4px;">
+                <tr style="background-color:#f7f6f5;">
+                  <td style="padding:12px 16px;font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid #e2e8f0;width:42%;">Listing</td>
+                  <td style="padding:12px 16px;font-size:14px;color:#1c1e2e;border-bottom:1px solid #e2e8f0;">{{title}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid #e2e8f0;">Amount</td>
+                  <td style="padding:12px 16px;font-size:15px;font-weight:700;color:#1c1e2e;border-bottom:1px solid #e2e8f0;">{{currency}} {{amount}}</td>
+                </tr>
+                <tr style="background-color:#f7f6f5;">
+                  <td style="padding:12px 16px;font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid #e2e8f0;">Transaction Ref</td>
+                  <td style="padding:12px 16px;font-size:13px;color:#1c1e2e;font-family:'Courier New',Courier,monospace;border-bottom:1px solid #e2e8f0;">{{txn_ref}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid #e2e8f0;">Payment Date</td>
+                  <td style="padding:12px 16px;font-size:14px;color:#1c1e2e;border-bottom:1px solid #e2e8f0;">{{payment_date}}</td>
+                </tr>
+                <tr style="background-color:#f7f6f5;">
+                  <td style="padding:12px 16px;font-size:13px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Active Until</td>
+                  <td style="padding:12px 16px;font-size:14px;font-weight:700;color:#1c1e2e;">{{renewal_date}}</td>
+                </tr>
+              </table>
+
+              <!-- CTA -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                <tr>
+                  <td style="border-radius:4px;border:2px solid #78cde8;background-color:#78cde8;">
+                    <a href="{{url}}" style="display:inline-block;padding:12px 28px;font-size:15px;font-weight:600;color:#1a2a45;text-decoration:none;border-radius:4px;line-height:1;">View My Listing →</a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- DIVIDER -->
+              <hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 24px 0;" />
+
+              <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.6;">Need a formal invoice or have a question about this payment? Just reply to this email.</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="background-color:#0c0f1a;padding:24px 32px;border-radius:0 0 4px 4px;">
+              <p style="margin:0;font-size:12px;color:#9ca3af;letter-spacing:0.1em;">
+                © 2026 LUXOTICARS SDN. BHD. &nbsp;·&nbsp;
+                <a href="https://dash.luxoticars.cc" style="color:#9ca3af;text-decoration:underline;">dash.luxoticars.cc</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
