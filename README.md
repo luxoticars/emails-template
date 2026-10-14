@@ -2,6 +2,8 @@
 
 Static HTML source for transactional emails sent by the dash notification Edge Functions. These files are not deployed on their own — they're uploaded into **ZeptoMail** as templates, and the dash calls ZeptoMail's send API referencing the template + merge data.
 
+The `merchandise-*.html` files are archival exports for the merchandise store. They use the same brand design, but the store renders its versioned HTML and sends it directly through ZeptoMail; **do not upload these files as a required deployment step**. See [Merchandise notifications](#merchandise-notifications) below.
+
 ## Templates and merge tags
 
 Each `{{tag}}` below must be added as a merge field when you create the template in ZeptoMail.
@@ -49,3 +51,28 @@ Do this once per file (except `confirm-email.html`, see above):
 - All images (logo, cover photos) are referenced by absolute URL in the HTML — there are no local/inline assets to upload separately.
 - Templates use inline CSS for email-client compatibility; don't move styles into a `<style>` block without testing in Outlook/Gmail, which strip or ignore many `<style>` rules.
 - `{{cover_url}}` and `{{dash_url}}` are populated by the dash from Supabase post data — leave them blank in ZeptoMail's test panel only if the template gracefully hides the image block, otherwise supply a real URL when testing.
+
+## Merchandise notifications
+
+These four exports preserve the receipt design (navy header/footer, Luxoticars logo, blue accents, 600px table layout and inline CSS) for [luxoticars-merchandise](https://github.com/luxoticars/luxoticars-merchandise).
+
+| File | Subject | Recipient / event |
+| --- | --- | --- |
+| `merchandise-receipt.html` | Payment confirmed — Luxoticars merchandise | Customer, after verified payment |
+| `merchandise-admin-paid.html` | New paid order — Luxoticars merchandise | Store admin, after verified payment |
+| `merchandise-fulfilled.html` | Your order is fulfilled — Luxoticars merchandise | Customer, when the owner marks the order fulfilled |
+| `merchandise-admin-review.html` | Payment needs review — Luxoticars merchandise | Store admin, for late or mismatched payments |
+
+Runtime sources are `src/lib/email-layout.ts` and `src/lib/order-email.ts` in the merchandise repository. To update these archives, edit the runtime source and run this command there with both repositories checked out as siblings:
+
+```sh
+pnpm run emails:export ../emails-template
+```
+
+Review and commit both repositories together. These files are not fetched by the live store, and changes here alone do not change outgoing mail. The exporter preserves merge tags for documentation and future reuse; the current app performs the substitutions locally and sends both HTML and plain text through ZeptoMail's `/v1.1/email` endpoint. It uses the dashboard's sender, reply-to, and credential configuration conventions. See the merchandise README for setup, queue monitoring and retry behavior.
+
+Common fields are `{{order_id}}`, `{{event_date}}` (Malaysia time), `{{transaction_ref}}`, `{{items_rows}}`, `{{subtotal}}`, `{{delivery}}`, `{{total}}`, `{{shipping_address}}`, `{{url}}`, and `{{year}}`. Customer greetings and admin detail rows also use `{{name}}`. Admin messages additionally use `{{customer_email}}` and `{{customer_phone}}`; the review alert adds `{{review_reason}}`.
+
+Escape all scalar fields as HTML before substitution, including attribute values. `{{items_rows}}` is trusted `<tr>` markup built from escaped item names/variants, integer quantities, unit prices and line totals; `{{shipping_address}}` consists of escaped address lines joined with `<br />`. Never place raw customer HTML in either field. Amounts include the `RM` prefix and two decimals. `{{url}}` is the configured store origin for customer messages and its authenticated `/admin` page for admin messages; do not include order access tokens.
+
+The receipt is a payment acknowledgment, not a tax invoice. Fulfillment messages intentionally make no carrier/tracking claim because the store has no carrier integration. Payment-review alerts say “Order total”, not “Total paid”.
